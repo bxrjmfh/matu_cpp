@@ -1,11 +1,11 @@
-#include<iostream>
-using namespace std;
+
+#include <iostream>
+
+using namespace  std;
 int main(){
-    int i,j;
-    for(i =0;i<=9;i++){
-        j = i*10 +6;
-        if((j%3)!=0)continue;
-        cout<<j;
+    for(int i=100;i<=200;i++){
+        if(i%3!=0&&i%7!=0){
+            cout<<i;
+        }
     }
-    return 0;
 }
