@@ -1,24 +1,45 @@
 #include <iostream>
 
-int main() {
+void print_star(int n, int m) {
+    int mid = (n - 1) / 2 + 1;
+    int star = (n - m) / 2;
+    int i = 1;
+
+    while (i <= star) {
+        printf(" ");
+        i++;
+    }
+    while (i < mid) {
+        printf("*");
+        i++;
+    }
+
+    printf("*");
+    i++;
+    while (i <= n-star) {
+        printf("*");
+        i++;
+    }
+    while (i <= n) {
+        printf(" ");
+        i++;
+    }
+    printf("\n");
+
 
 }
 
-
-
-void expand (char *s ,char *t)
-{
-    for(int i =0, j=0;s[i] !='\0';i++){
-        switch(s[i]){
-            case'\n':t[j++] ='\\';
-            t[j++] ='n';
-            break;
-            case'\t':t[j++] ='\\';
-            t[j++] ='t';
-            break;
-            default: t[j++] = s[i];
-            break;
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n % 2 == 0&&n>=1&&n<80) {
+        printf("error");
+        return 0;
+    } else {
+        for (int i = n; i > 0; i -= 2) {
+            print_star(n, i);
         }
-        t[j] ='\0';
+        return 0;
     }
+
 }
