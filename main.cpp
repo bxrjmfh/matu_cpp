@@ -161,8 +161,8 @@ public:
                                 }
                                 else {
                                     status.counter = 1;
-                                    status.direction = "down";
-                                    return generator_down_point(now);
+                                    status.direction = "right";
+                                    return generator_right_point(now);
                                 }
                             }
                             break;
@@ -374,7 +374,6 @@ public:
         left = judge_left(now);
         return rand_direction(up, down, left, right, now);
     }
-
     void generate(void) {
         srand(time(0));
         generator_way_point start = generator_way_point();
@@ -385,13 +384,18 @@ public:
         start.next = generator_through_way(&start);
         generator_way_point* p = start.next;
         while (1) {
+
             p->next = generator_through_way(p);
-            p = p->next;
-            showmap();
+            if (p->next) {
+                p = p->next;
+                showmap();
+            }
+            else {
+                break;
+            }
         }
         return;
     }
-
     void showmap() {
         system("cls");
         for (int i = 0; i < LENGTH; i++) {
@@ -403,7 +407,7 @@ public:
         printf("\n");
         printf("\n");
         printf("\n");
-        system("pause");
+        //system("pause");
         return;
     }
 };
@@ -411,5 +415,6 @@ public:
 
 int main() {
     Map map;
+
     map.generate();
 }
