@@ -315,7 +315,6 @@ public:
             }
         }
     }
-
     int judge_up(generator_way_point* now) {
         int x = now->x;
         int y = now->y;
@@ -326,7 +325,6 @@ public:
         }
         else return 0;
     }
-
     int judge_down(generator_way_point* now) {
         int x = now->x;
         int y = now->y;
@@ -338,7 +336,6 @@ public:
         }
         else return 0;
     }
-
     int judge_left(generator_way_point* now) {
         int x = now->x;
         int y = now->y;
@@ -350,7 +347,6 @@ public:
         }
         else return 0;
     }
-
     int judge_right(generator_way_point* now) {
         int x = now->x;
         int y = now->y;
@@ -362,7 +358,6 @@ public:
         }
         else return 0;
     }
-
     generator_way_point* generator_through_way(generator_way_point* now) {
         int up = 1;
         int down = 1;
@@ -374,17 +369,16 @@ public:
         left = judge_left(now);
         return rand_direction(up, down, left, right, now);
     }
-    void generate(void) {
+    generator_way_point generate_all_through_way(void) {
         srand(time(0));
         generator_way_point start = generator_way_point();
         start.x = (int)rand() % (LENGTH - 2);
         start.y = 0;
         map[start.x][0] = 1;
-        showmap();
+        //        showmap();
         start.next = generator_through_way(&start);
         generator_way_point* p = start.next;
         while (1) {
-
             p->next = generator_through_way(p);
             if (p->next) {
                 p = p->next;
@@ -394,7 +388,34 @@ public:
                 break;
             }
         }
-        return;
+        return start;
+    }
+    void clean_all_trough_way(generator_way_point *start){
+        generator_way_point * temp=start;
+        while (temp->next)
+        {
+            temp = temp->next;
+        }
+        while (temp->last){
+            start=temp->last;
+            map[temp->x][temp->y]=0;
+            free(temp);
+            temp=start;
+        }
+    }
+    generator_way_point generate(void) {
+        generator_way_point temp = generate_all_through_way();
+        generator_way_point* tail = NULL, * start = &temp;
+        while (temp.next)
+        {
+            temp = *temp.next;
+        }
+        while (temp.y < LENGTH - 5) {
+            clean_all_trough_way(start);
+            temp = generate_all_through_way();
+        }
+        showmap();
+        return temp;
     }
     void showmap() {
         system("cls");
@@ -415,6 +436,5 @@ public:
 
 int main() {
     Map map;
-
     map.generate();
 }
