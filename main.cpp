@@ -5,24 +5,40 @@
 
 
 using namespace std;
-int find_step(double precision){
-    int i=1;
-    while((double)1/i>precision){
-        i=2*i-1;
-    }
-    return i;
-}
-double find_pi(int step){
-    if(step==1){
-        return 4.0;
-    }
-    else{
-        return ((step%2)*2-1)*(1/step)+ find_pi(step-1);
-    }
-}
+
 int main() {
-    double steps=find_step(1.0e-8);
-    double pi = find_pi(steps);
-    cout<<"steps="<<steps<<" PI=";
-    printf("%.5f",pi);
+    int yy;
+    int MM;
+    bool is_= false;
+    cin>>yy>>MM;
+    if(yy%400==0||(yy%4==0&&yy%100!=0)){is_=true;}
+    if(MM>12){MM%=12;}
+    switch (MM) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            cout<<"days:31";
+            break;
+
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            cout<<"days:30";
+            break;
+
+        case 2:
+            if(is_){
+                cout<<"days:29";
+            }else{
+                cout<<"days:28";
+            }
+            break;
+        default:
+            ;
+    }
 }
