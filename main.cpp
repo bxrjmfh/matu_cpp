@@ -5,40 +5,44 @@
 
 
 using namespace std;
-
-int main() {
-    int yy;
-    int MM;
-    bool is_= false;
-    cin>>yy>>MM;
-    if(yy%400==0||(yy%4==0&&yy%100!=0)){is_=true;}
-    if(MM>12){MM%=12;}
-    switch (MM) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            cout<<"days:31";
-            break;
-
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            cout<<"days:30";
-            break;
-
-        case 2:
-            if(is_){
-                cout<<"days:29";
-            }else{
-                cout<<"days:28";
+void sort(vector<int>arr) {
+    for (int i = arr.size()-1; i >= 0; i--) {
+        for (int j = 0; j <= i - 1; j++) {
+            int temp;
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
-            break;
-        default:
-            ;
+        }
     }
+}
+int main()
+{
+    vector<int> arr;
+    int counter = 0;
+    int temp = -1;
+    do {
+        cin >> temp;
+        if (temp < 0) { break; }
+        arr.push_back(temp);
+        counter++;
+        if (counter == 10) { break; }
+    } while (1);
+
+    vector<int> arr_even, arr_odd;
+    for (int i=0;i<arr.size();i++) {
+        if (arr[i] % 2 == 0) {
+            arr_even.push_back(arr[i]);
+        }
+        else {
+            arr_odd.push_back(arr[i]);
+        }
+    }
+    sort(arr_odd);
+    sort(arr_even);
+
+    for (int i=0;i<arr_odd.size();i++ ) { cout << arr_odd[i] << " "; }
+    for (int i=0;i<arr_even.size();i++ ) { cout << arr_even[i] << " "; }
+
 }
