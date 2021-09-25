@@ -6,18 +6,29 @@
 
 
 using namespace std;
-void Matrix_Mul(int a[3][2], int b[2][4]){
-    for(int j=0;j<3;j++){
-        for(int i=0;i<4;i++){
-            cout<<a[j][0]*b[0][i]+a[j][1]*b[1][i]<<" ";
+int SubStrNum(char* str, char* substr) {
+    string Str = str;
+    string Substr = substr;
+    int counter = 0;
+    for (int i = 0; i <= Str.size() - Substr.size(); i++) {
+        int flag = 0;
+        for (int j = i; j-i < Substr.size(); j++) {
+            if (Substr[j - i] != Str[j]) {
+                flag = 1;
+
+                break;
+            }
         }
-        cout<<endl;
+        if (flag == 0) {
+            counter++;
+            i = i + Substr.size()-1;
+        }
     }
-
+    cout << "match times=" << counter;
+    return counter;
 }
-int main(){
-    int a[3][2] ={{1,2}, {3,4},  {5,6}},   b[2][4]={{1,0,1,1},{0,1,0,1}};
-    Matrix_Mul(a,b);
-
-
+int main() {
+    char s1[] = "sadasadsadsasdssdasd";
+    char s2[] = "da";
+    int p= SubStrNum(s1,s2 );
 }
