@@ -1,31 +1,26 @@
-#include "iostream"
-#include <math.h>
+#include <iostream>
+
+class Location{
+private :
+    int X,Y;
+public:
+    void init(int initX,int initY){
+        X = initX;
+        Y = initY;
+    }
+    int GetX(){
+        return X;
+    }
+    int GetY(){
+        return Y;
+    }
+};
+
 using namespace std;
 int main(){
-    char c;
-    float a,b,result(0);
-    int tag(1); //标志，1；合法，0：数据或操作不合法
-    cin>>a>>b>>c;
-    switch(c){
-        case'+':result = a+b; break;
-        case'-':result = a-b;break;
-        case'*':result = a*b;break;
-        case'/':
-        if(fabs(b)<1e-6){
-            cout<<"divide 0"<< endl;//注意0前面有空格
-            tag=0;
-            break;
-        }
-        result = a/b;
-        cout<<result<<endl;
-        break;
-        default:
-        tag =0;
-        cout<<"invalid operation"<<endl;
-            break;
-    }
-    if(tag){
-        cout<<result<<endl;
-    }
+    Location A1;
+    A1.init(20,90);
+    Location &rA1=A1;     //定义一个指向A1的引用rA1;
+    cout<<rA1.GetX()<<rA1.GetY(); //用rA1在屏幕上依次输出对象A1的数据成员X和Y的值;
     return 0;
 }
