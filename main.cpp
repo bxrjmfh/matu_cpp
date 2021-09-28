@@ -1,151 +1,42 @@
 #include <iostream>
 #include <math.h>
-#include "CDate.h"
+#include <string>
+using namespace std;
 
-Date::Date(int y, int m, int d) {
-    if (m >= 1 && m <= 12) {
-        this->month = m;
-    } else {
-        cout << "Invalid month!"<<endl;
-        this->month = 1;
+class Student{
+    string name;
+    string num;
+    int grade[3];
+public:
+    Student(string name,string num,int n1,int n2,int n3){
+        this->name=name;
+        this->num=num;
+        this->grade[0]=n1;
+        this->grade[1]=n2;
+        this->grade[2]=n3;
     }
-    switch (this->month) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            if (d >= 1 && d <= 31) {
-                this->day = d;
-            } else {
-                cout << "Invalid day!"<<endl;
-                this->day = 1;
-            }
-            break;
-
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            if (d >= 1 && d <= 30) {
-                this->day = d;
-            } else {
-                cout << "Invalid day!";
-                this->day = 1;
-            }
-            break;
-        case 2:
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                if (d >= 1 && d <= 29) {
-                    this->day = d;
-                } else {
-                    cout << "Invalid day!";
-                    this->day = 1;
-                }
-            } else {
-                if (d >= 1 && d <= 28) {
-                    this->day = d;
-                } else {
-                    cout << "Invalid day!";
-                    this->day = 1;
-                }
-            }
-            break;
-        default:
-            break;
+    void display(void){
+        cout<<num<<" "<<name<<" "<<grade[0]<<" "<<grade[1]<<" "<<grade[2]<<" ";
     }
-    this->year=y;
-}
+};
+int main(){
+    Student *stu1,*stu2,*stu3;
+    char name1[10],name2[10],name3[10];
+    char num1[12],num2[12],num3[12];
+    int grade1[3],grade2[3],grade3[3];
+    cin>>name1>>num1>>grade1[0]>>grade1[1]>>grade1[2];
+    cin>>name2>>num2>>grade2[0]>>grade2[1]>>grade2[2];
+    cin>>name3>>num3>>grade3[0]>>grade3[1]>>grade3[2];
+    stu1 = new Student(name1,num1,grade1[0],grade1[1],grade1[2]);
+    stu2 = new Student(name2,num2,grade2[0],grade2[1],grade2[2]);
+    stu3 = new Student(name3,num3,grade3[0],grade3[1],grade3[2]);
 
-int Date::days(int year, int month) {
-    switch (month) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            return 31;
-            break;
+    stu1->display();
+    stu2->display();
+    stu3->display();
 
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            return 30;
-            break;
-        case 2:
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                return 29;
-            } else {
-                return 28;
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-void Date::NewDay() {
-    int month_flag = 0;
-    int year_flag = 0;
-
-    switch (this->month) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            if (this->day == 31) {
-                this->day = 1;
-                month_flag++;
-            } else {
-                this->day += 1;
-            }
-            break;
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            if (this->day == 30) {
-                this->day = 1;
-                month_flag++;
-            } else {
-                this->day += 1;
-            }
-            break;
-        case 2:
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                if (this->day == 29) {
-                    this->day = 1;
-                    month_flag++;
-                } else {
-                    this->day += 1;
-                }
-            } else {
-                if (this->day == 28) {
-                    this->day = 1;
-                    month_flag++;
-                } else {
-                    this->day += 1;
-                }
-            }
-            break;
-        default:
-            break;
-    }
-
-    if (this->month < 12) {
-        this->month += month_flag;
-    } else {
-        this->month = 1;
-        year_flag++;
-    }
-
-    this->year += year_flag;
+    cout<<"The average grade of course1:"<<(grade1[0]+grade2[0]+grade3[0])/3.0<<endl;
+    cout<<"The average grade of course2:"<<(grade1[1]+grade2[1]+grade3[1])/3.0<<endl;
+    cout<<"The average grade of course3:"<<(grade1[2]+grade2[2]+grade3[2])/3.0<<endl;
+    return 0;
 }
