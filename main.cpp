@@ -1,60 +1,46 @@
-
-#include "Clock.h"
-
-Clock::Clock(int h,int m, int s){
-    if(h>=0&&h<=23){
-        this->hour=h;
-    }else{
-        this->hour=0;
+#include <iostream>
+#include <vector>
+using namespace std;
+class User {
+    vector<string> name;
+    vector<string> password;
+public:
+    User(string name, string password) {
+        this->name.push_back(name);
+        this->password.push_back(password);
     }
-    if(m>=0&&m<=59){
-        this->minute=m;
-    }else{
-        this->minute=0;
+    void AddUser(string name, string password) {
+        this->name.push_back(name);
+        this->password.push_back(password);
     }
-    if(s>=0&&s<=59){
-        this->second=s;
-    }else{
-        this->second=0;
-    }
-}
-void Clock::SetAlarm(int h,int m, int s){
-    if(h<=23){
-        this->Ahour=h;
-    }else{
-        this->Ahour=0;
-    }
-    if(m<=59){
-        this->Aminute=m;
-    }else{
-        this->Aminute=0;
-    }
-    if(s<=59){
-        this->Asecond=s;
-    }else{
-        this->Asecond=0;
-    }
-}
-
-void Clock::run(){
-    this->second+=1;
-    if(this->second==60){
-        this->second=0;
-        if(this->minute==59){
-            this->minute=0;
-            if(this->hour==23){
-                this->hour=0;
-            }else{
-                this->hour+=1;
+    int login(string name, string password) {
+        int location = 0;
+        for (int i = 0; i < this->name.size(); i++) {
+            if (!this->name[i].compare(name)) {
+                location = i;
+                break;
             }
-        }else{
-            this->minute+=1;
+        }
+        if (!this->password[location].compare(password) ) {
+            return location;
+        }
+
+        else {
+            return -1;
         }
     }
-
-    if(this->hour==this->Ahour&&
-    this->minute==this->Aminute&&
-    this->second==this->Asecond){
-        cout<<"Plink!plink!plink!..."<<endl;
+};
+int main() {
+    char name[10], name1[10], pass[10], pass1[10];
+    cin >> name >> pass >> name1 >> pass1;
+    User user("LiWei", "liwei101");
+    user.AddUser(name, pass);
+    if (user.login(name1, pass1) >= 0)
+    {
+        cout << "Success Login!" << endl;
     }
-}
+    else {
+        cout << "Login failed!" << endl;
+    }
+    return 0;
+};
