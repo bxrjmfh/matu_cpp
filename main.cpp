@@ -1,46 +1,34 @@
 #include <iostream>
 #include <vector>
-using namespace std;
-class User {
-    vector<string> name;
-    vector<string> password;
-public:
-    User(string name, string password) {
-        this->name.push_back(name);
-        this->password.push_back(password);
-    }
-    void AddUser(string name, string password) {
-        this->name.push_back(name);
-        this->password.push_back(password);
-    }
-    int login(string name, string password) {
-        int location = 0;
-        for (int i = 0; i < this->name.size(); i++) {
-            if (!this->name[i].compare(name)) {
-                location = i;
-                break;
-            }
-        }
-        if (!this->password[location].compare(password) ) {
-            return location;
-        }
+#include <math.h>
 
-        else {
-            return -1;
-        }
+using namespace std;
+class Ctriangle {
+    double a,b,c;
+    public:
+    Ctriangle(double a,double b,double c){
+        this->a=a;
+        this->b=b;
+        this->c=c;
+    }
+    void display(void){
+        cout<<"Ctriangle:a="<<a<<",b="<<b<<",c="<<c<<endl;
+    }
+    double GetPerimeter(void){
+        return(a+b+c);
+    }
+    double GetArea(void){
+        double s=(a+b+c)/2;
+        double area=sqrt(s*(s-a)*(s-b)*(s-c));
+        return area;
     }
 };
-int main() {
-    char name[10], name1[10], pass[10], pass1[10];
-    cin >> name >> pass >> name1 >> pass1;
-    User user("LiWei", "liwei101");
-    user.AddUser(name, pass);
-    if (user.login(name1, pass1) >= 0)
-    {
-        cout << "Success Login!" << endl;
-    }
-    else {
-        cout << "Login failed!" << endl;
-    }
+int main(){
+    double a,b,c;
+    cin>>a>>b>>c;
+    Ctriangle T(a,b,c);
+    T.display();
+    cout<<"Perimeter:"<<T.GetPerimeter()<<endl;
+    cout<<"Area:"<<T.GetArea()<<endl;
     return 0;
-};
+}
