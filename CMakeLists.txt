@@ -3,4 +3,4 @@ project(CPP)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CPP main.cpp Clock.h CDate.h CString.h)
+add_executable(CPP main.cpp CPoint.h)
