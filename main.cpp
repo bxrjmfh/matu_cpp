@@ -1,25 +1,37 @@
-#include "CNumberFactory.h"
-class CNumber :public CNumberFactory{
-private:
-    int num;
+#include "Building.h"
+class TeachBuilding :public Building{
+    char function[20];
 public:
-    CNumber(){
-        this->num=0;
+    virtual void display(){
+        cout<<"Name:"<<name<<endl;
+        cout<<"Floor:"<<floor<<endl;
+        cout<<"Room:"<<room<<endl;
+        cout<<"Area:"<<area<<endl;
+        cout<<"Function:"<<function<<endl;
     }
-    void SetValue(int number){
-        this->num=number;
-    }
-    int GetValue(void){
-       return this->num;
-    }
-    virtual void Add(int number) override{
-        this->num+=number;
-    }
-    virtual void Sub(int number) override{
-        this->num-=number;
+    TeachBuilding(char *name,int floor,int room,int area,char *function):
+                Building(name,floor,room,area){
+        strcpy(this->function,function);
     }
 };
-CNumberFactory *CNumberFactory::Create()
-{
-    return new CNumber();
+class DormBuilding :public Building{
+    int peoples;
+public:
+    virtual void display(){
+        cout<<"Name:"<<name<<endl;
+        cout<<"Floor:"<<floor<<endl;
+        cout<<"Room:"<<room<<endl;
+        cout<<"Area:"<<area<<endl;
+        cout<<"Peoples:"<<peoples<<endl;
+    }
+    DormBuilding(char *name,int floor,int room,int area,int peoples):
+    Building(name,floor,room,area){
+        this->peoples=peoples;
+    }
+};
+Building* Building::createTeachBuilding(char *name,int floor,int room,int area,char *function){
+    return  new TeachBuilding(name,floor,room,area,function);
+}
+Building * Building::creatDormBuilding(char *name,int floor,int room,int area,int peoples){
+    return new DormBuilding(name,floor,room,area,peoples);
 }
