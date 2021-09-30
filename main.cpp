@@ -1,37 +1,48 @@
-#include "Building.h"
-class TeachBuilding :public Building{
-    char function[20];
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class Table{
+    float high;
 public:
-    virtual void display(){
-        cout<<"Name:"<<name<<endl;
-        cout<<"Floor:"<<floor<<endl;
-        cout<<"Room:"<<room<<endl;
-        cout<<"Area:"<<area<<endl;
-        cout<<"Function:"<<function<<endl;
+    Table(float high=0){
+        this->high=high;
     }
-    TeachBuilding(char *name,int floor,int room,int area,char *function):
-                Building(name,floor,room,area){
-        strcpy(this->function,function);
+    float GetHigh(void){
+        return high;
     }
 };
-class DormBuilding :public Building{
-    int peoples;
+
+class Circle{
+    float radius;
 public:
-    virtual void display(){
-        cout<<"Name:"<<name<<endl;
-        cout<<"Floor:"<<floor<<endl;
-        cout<<"Room:"<<room<<endl;
-        cout<<"Area:"<<area<<endl;
-        cout<<"Peoples:"<<peoples<<endl;
+    Circle(float radius){
+        this->radius=radius;
     }
-    DormBuilding(char *name,int floor,int room,int area,int peoples):
-    Building(name,floor,room,area){
-        this->peoples=peoples;
+    float GetArea(void){
+        double pi=3.14;
+        return this->radius*this->radius*pi;
     }
 };
-Building* Building::createTeachBuilding(char *name,int floor,int room,int area,char *function){
-    return  new TeachBuilding(name,floor,room,area,function);
-}
-Building * Building::creatDormBuilding(char *name,int floor,int room,int area,int peoples){
-    return new DormBuilding(name,floor,room,area,peoples);
+class RoundTable:public Circle,public Table{
+    char color[100];
+public:
+    RoundTable(float a,float b,char *c): Table(b), Circle(a){
+        strcpy(this->color,c);
+    }
+    char *GetColor(){
+        return this->color;
+    }
+};
+int main(){
+    float radius,high;
+    char color[20];
+    cin>>radius>>high>>color;
+
+    RoundTable RT(radius,high,color);
+    cout<<"Area:"<<RT.GetArea()<<endl;
+    cout<<"High:"<<RT.GetHigh()<<endl;
+    cout<<"Color:"<<RT.GetColor()<<endl;
+    return 0;
 }
