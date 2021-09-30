@@ -1,48 +1,28 @@
 #include <iostream>
 #include <cstring>
-
+#include "Clock.h"
 using namespace std;
 
-class Table{
-    float high;
+class NewClock:public Clock{
 public:
-    Table(float high=0){
-        this->high=high;
-    }
-    float GetHigh(void){
-        return high;
-    }
-};
+    NewClock(int h,int m,int s):Clock(h,m,s){
 
-class Circle{
-    float radius;
-public:
-    Circle(float radius){
-        this->radius=radius;
     }
-    float GetArea(void){
-        double pi=3.14;
-        return this->radius*this->radius*pi;
-    }
-};
-class RoundTable:public Circle,public Table{
-    char color[100];
-public:
-    RoundTable(float a,float b,char *c): Table(b), Circle(a){
-        strcpy(this->color,c);
-    }
-    char *GetColor(){
-        return this->color;
-    }
-};
-int main(){
-    float radius,high;
-    char color[20];
-    cin>>radius>>high>>color;
+    virtual void showTime(void) override{
+        int h=getHour();
+        int m=getMinute();
+        int s=getSecond();
 
-    RoundTable RT(radius,high,color);
-    cout<<"Area:"<<RT.GetArea()<<endl;
-    cout<<"High:"<<RT.GetHigh()<<endl;
-    cout<<"Color:"<<RT.GetColor()<<endl;
-    return 0;
+        if(h<12){
+            cout<<"Now:"<<h<<":"<<m<<":"<<s<<"AM"<<endl;
+        }else if(h==12){
+            cout<<"Now:"<<h<<":"<<m<<":"<<s<<"PM"<<endl;
+        }else{
+            cout<<"Now:"<<h-12<<":"<<m<<":"<<s<<"PM"<<endl;
+        }
+
+    }
+};
+Clock* Clock::createNewClock(int h,int m,int s){
+    return new NewClock(h,m,s);
 }
