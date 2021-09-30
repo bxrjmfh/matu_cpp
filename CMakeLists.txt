@@ -3,4 +3,4 @@ project(CPP)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CPP main.cpp CSet.h)
+add_executable(CPP main.cpp CSet.h ShapeFactory.h)
