@@ -1,46 +1,35 @@
-#include"Vehicle.h"
+#include"Shape.h"
 
-class Car:public Vehicle{
-    ~Car(){
-        cout<<"Car destructor..."<<endl;
-    }
-    void display() const override{
-        cout<<"This is a car!"<<endl;
-    }
-
+class Rectangle :public Shape{
+    double a;
+    double b;
 public:
-    Car(){
-        cout<<"Car constructor..."<<endl;
+    Rectangle(double l,double w){
+        a=l;
+        b=w;
+    }
+    double GetArea()override{
+        return a*b;
+    }
+    double GetPerimeter()override{
+        return (a+b)*2;
     }
 };
 
-class Truck:public Vehicle{
-    ~Truck(){
-        cout<<"Truck destructor..."<<endl;
-    }
-    void display() const override{
-        cout<<"This is a truck!"<<endl;
-    }
 
+class Circle :public Shape{
+    double r;
 public:
-    Truck(){
-        cout<<"Truck constructor..."<<endl;
+    Circle(double r){
+        this->r=r;
+    }
+    double GetArea() override{
+        return(r*r*3.14);
+    }
+    double GetPerimeter() override{
+        return (2*r*3.14);
     }
 };
+Shape * Shape::createRectangle(double l,double w){return new Rectangle(l,w);}
+Shape * Shape::createCircle(double r){return new Circle(r);}
 
-class Boat:public Vehicle{
-    ~Boat(){
-        cout<<"Boat destructor..."<<endl;
-    }
-    void display() const override{
-        cout<<"This is a boat!"<<endl;
-    }
-
-public:
-    Boat(){
-        cout<<"Boat constructor..."<<endl;
-    }
-};
-Vehicle * Vehicle::createCar(){return new Car();}
-Vehicle * Vehicle::createTruck(){return new Truck();}
-Vehicle * Vehicle::createBoat(){return new Boat();}
