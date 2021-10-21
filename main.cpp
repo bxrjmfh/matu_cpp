@@ -1,74 +1,34 @@
 #include <iostream>
 
 using namespace std;
-class A {
-public:
-    int err;
 
-    A(int err){
-        this->err=err;
+namespace ns1
+
+{
+    namespace ns2{
+        char x='a';
+        char y='b';
+        int add_one(int num){
+            return (num+1);
+        }
+
     }
+    int x=1;
+    int y=2;
+}
 
-};
-class B {
-public:
-    int err;
-
-    B(int err){
-        this->err=err;
-    }
-
-};
 int main()
 
 {
 
-    int index, dividend, divisor, result;
+    using namespace ns1::ns2;
 
-    int array[10]={1,2,3,4,5,6,7,8,9,10};
+    cout << ns1::x << "," << ns1::y << endl;
 
-    try
+    cout << x << "," << y << endl;
 
-    {
-
-        cin >> index >> divisor;
-
-        if( index < 0 || index>9)
-
-            throw A(index);
-
-        if(divisor==0)
-
-            throw B(divisor);
-
-        dividend = array[index];
-
-        result = dividend / divisor;
-
-        cout << result << endl;
-
-    }
-
-    catch(A a)
-
-    {
-
-        cout << a.err << " out of bound" << endl;
-
-    }
-
-    catch(B b)
-
-    {
-
-        cout << "divide by "<< b.err << endl;
-
-    }
-
-
+    cout << add_one(10) << endl;
 
     return 0;
 
 }
-
-
