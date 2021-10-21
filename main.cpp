@@ -2,45 +2,36 @@
 
 using namespace std;
 
+namespace nsA
+
+{
+    int x=1;
+    int y=2;
+    namespace nsB{
+        char x='a';
+        char y='b';
+        int add_something(int n){
+            return n+2;
+        }
+    }
+    int add_something(int n){
+        return n+1;
+    }
+}
+
 int main()
 
 {
 
-    int index, dividend, divisor, result;
+    using namespace nsA;
 
-    int array[10]={1,2,3,4,5,6,7,8,9,10};
+    cout << x << "," << y << endl;
 
-    try
+    cout << nsA::nsB::x << "," << nsA::nsB::y << endl;
 
-    {
+    cout << add_something(10) << endl;
 
-        cin >> index >> divisor;
-
-        if( index < 0 || index>9)
-
-            throw index;
-
-        if(divisor==0)
-
-            throw divisor;
-
-        dividend = array[index];
-
-        result = dividend / divisor;
-
-        cout << result << endl;
-
-    }
-    catch (int index) {
-        if(index==0){
-            cerr <<"divide by 0" << endl;
-        }
-
-        else{
-            cerr << index<<" out of bound" << endl;
-
-        }
-    }
+    cout << nsA::nsB::add_something(10) << endl;
 
     return 0;
 
