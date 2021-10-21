@@ -2,10 +2,10 @@
 
 using namespace std;
 
-template<typename T>T get_max(T* arr,int size){
-    T temp=0;
-    for (int i = 0; i < size; ++i) {
-        if(arr[i]>temp){
+template<typename T>T get_min(T* arr,int size){
+    T temp=arr[0];
+    for (int i = 1; i < size; ++i) {
+        if(arr[i]<temp){
             temp=arr[i];
         }
     }
