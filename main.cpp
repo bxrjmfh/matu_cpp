@@ -2,32 +2,26 @@
 
 using namespace std;
 
-namespace ns1
-
-{
-    namespace ns2{
-        char x='a';
-        char y='b';
-        int add_one(int num){
-            return (num+1);
+template<typename T>T get_max(T* arr,int size){
+    T temp=0;
+    for (int i = 0; i < size; ++i) {
+        if(arr[i]>temp){
+            temp=arr[i];
         }
-
     }
-    int x=1;
-    int y=2;
+    return temp;
 }
-
 int main()
 
 {
 
-    using namespace ns1::ns2;
+    int arr_int[6] = { 1, 2, 3, 4, 5, 6 };
 
-    cout << ns1::x << "," << ns1::y << endl;
+    double arr_double[6] = { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6 };
 
-    cout << x << "," << y << endl;
+    cout << get_max(arr_int, 6) << endl;
 
-    cout << add_one(10) << endl;
+    cout << get_max(arr_double, 6) << endl;
 
     return 0;
 
